@@ -26,7 +26,7 @@ function SkillIssue(message) {
     if (!message.content.toLowerCase().includes('skill issue')) return;
     
     counter.SkillIssue[id]++;
-    message.channel.send(`${message.member.displayName} has said skill issue ${counter.SkillIssue[id]} time(s)!`)
+    message.channel.send(`${message.member.displayName} has said skill issue ${counter.SkillIssue[id]} time(s)!`);
     fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), UpdateJSON);
 }
 
