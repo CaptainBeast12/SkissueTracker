@@ -16,7 +16,7 @@ client.on('message', CommandHandler);
 client.on('message', SkillIssue);
 
 function SkillIssue(message) {
-    const id = message.author.id
+    const id = message.author.id;
     let foundId = false;
     for (const key in counter.SkillIssue) {
         if (id == key) foundId = true;
