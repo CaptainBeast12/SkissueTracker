@@ -9,7 +9,8 @@ module.exports = {
 			}
 		}
 
-		if (args.length <= 0) return;
-		message.channel.send(args.join(' '));
+		const messageToSend = args.join(' ');
+		if (messageToSend === null || messageToSend.match(/^ *$/) !== null) return;
+		message.channel.send(messageToSend);
 	},
 };
