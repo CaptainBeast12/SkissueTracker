@@ -19,7 +19,10 @@ function SkillIssue(message) {
     const id = message.author.id;
     let foundId = false;
     for (const key in counter.SkillIssue) {
-        if (id == key) foundId = true;
+        if (id == key) {
+            foundId = true;
+            break;
+        }
     }
 
     if (!foundId) return;
