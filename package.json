@@ -15,7 +15,6 @@
     "dotenv": "^9.0.2"
   },
   "devDependencies": {
-    "eslint": "^7.26.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint": "^7.26.0"
   }
 }
