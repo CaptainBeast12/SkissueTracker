@@ -3,8 +3,9 @@ module.exports = {
 	description: 'Echos back whatever is passed in the args.',
 	execute(message, args) {
 		for (let i = 0; i < args.length; i++) {
-			if (args[i] == '@here' || args[i] == '@everyone') {
-				args.splice(i, 1);
+			if (args[i].includes('@here') || args[i].includes('@everyone')) {
+				args[i] = args[i].replace('@here', '');
+				args[i] = args[i].replace('@everyone', '');
 			}
 		}
 
