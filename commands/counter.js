@@ -1,8 +1,9 @@
+const counter = require('../counter.json');
+
 module.exports = {
 	name: 'counter',
 	description: 'Shows how many times a certain someone has said skill issue.',
 	async execute(message, args) {
-		const counter = require('../counter.json');
 		let description = '';
         for (const key in counter.SkillIssue) {
 			const user = await message.guild.members.fetch(key);

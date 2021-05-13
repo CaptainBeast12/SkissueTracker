@@ -2,7 +2,6 @@ const fs = require('fs');
 let counter = require('../counter.json');
 
 function IsAddedToCounter(id) {
-    counter = require('../counter.json');
     for (const key in counter.SkillIssue) {
         if (id == key) return true;
     }
