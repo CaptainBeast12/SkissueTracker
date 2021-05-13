@@ -64,7 +64,7 @@ module.exports = {
                 message.channel.send(`Successfully deleted **${user.displayName}** from the tracker!`);
                 break;
             default:
-                message.channel.send(`Error: ${args[0]} is not a vaild argument.`)
+                message.channel.send(`Error: ${args[0]} is not a vaild argument.`);
                 break;
         }
 	},

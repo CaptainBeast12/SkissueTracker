@@ -10,7 +10,7 @@ let counter = require('./counter');
 client.login(process.env.BOT_TOKEN);
 client.on('ready', () => {
     console.log("Client has started.");
-})
+});
 
 client.on('message', CommandHandler);
 client.on('message', SkillIssue);
