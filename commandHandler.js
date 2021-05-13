@@ -9,8 +9,7 @@ for (const file of commandFiles) {
     commands[command.name] = command;
 }
 
-module.exports = function(message) 
-{
+module.exports = function(message) {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
