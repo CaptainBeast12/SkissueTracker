@@ -40,9 +40,13 @@ module.exports = {
         }
 
         const user = await GetUserFromMention(message.guild, args[1]);
+        if (!user) {
+            message.channel.send("User doesn't exist!");
+            return;
+        }
+        
 		switch (args[0].toLowerCase()) {
             case 'add':
-                if (!user) return;
                 if (IsAddedToCounter(user.id)) {
                     message.channel.send(`User **${user.displayName}** is already added to the tracker.`);
                     return;
@@ -53,7 +57,6 @@ module.exports = {
                 message.channel.send(`Successfully added **${user.displayName}** to the tracker!`);
                 break;
             case 'remove':
-                if (!user) return;
                 if (!IsAddedToCounter(user.id)) return;
                 
                 delete counter.SkillIssue[user.id];
