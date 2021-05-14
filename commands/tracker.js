@@ -1,5 +1,5 @@
 const fs = require('fs');
-let counter = require('../counter.json');
+const counter = require('../counter.json');
 
 function IsAddedToCounter(id) {
     for (const key in counter.SkillIssue) {
@@ -47,7 +47,7 @@ module.exports = {
 		switch (args[0].toLowerCase()) {
             case 'add':
                 if (IsAddedToCounter(user.id)) {
-                    message.channel.send(`User **${user.displayName}** is already added to the tracker.`);
+                    message.channel.send(`**${user.displayName}** is already added to the tracker.`);
                     return;
                 }
                 
@@ -56,11 +56,30 @@ module.exports = {
                 message.channel.send(`Successfully added **${user.displayName}** to the tracker!`);
                 break;
             case 'remove':
-                if (!IsAddedToCounter(user.id)) return;
+                if (!IsAddedToCounter(user.id)) {
+                    message.channel.send(`**${user.displayName}** isn't added to the tracker.`);
+                    return;
+                }
                 
                 delete counter.SkillIssue[user.id];
                 fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), UpdateJSON);
-                message.channel.send(`Successfully deleted **${user.displayName}** from the tracker!`);
+                message.channel.send(`Successfully removed **${user.displayName}** from the tracker!`);
+                break;
+            case 'update':
+                if (!IsAddedToCounter(user.id)) {
+                    message.channel.send(`**${user.displayName}** isn't added to the tracker.`);
+                    return;
+                }
+
+                if (!args[2]) {
+                    message.channel.send('The update amount must be specified in the third argument.');
+                    return;
+                }
+
+                args[2] = Math.floor(args[2]);
+                counter.SkillIssue[user.id] = args[2];
+                fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), UpdateJSON);
+                message.channel.send(`Successfully updated **${user.displayName}'s** value to ${args[2]}!`);
                 break;
             default:
                 message.channel.send(`Error: ${args[0]} is not a vaild argument.`);
