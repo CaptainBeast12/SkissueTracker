@@ -2,10 +2,9 @@ require('dotenv').config();
 
 const Discord = require('discord.js');
 const CommandHandler = require('./commandHandler');
+const counter = require('./counter');
 const fs = require('fs');
 const client = new Discord.Client();
-
-const counter = require('./counter');
 
 client.login(process.env.BOT_TOKEN);
 client.on('ready', () => {
@@ -31,9 +30,5 @@ function SkillIssue(message) {
 
     counter.SkillIssue[id] += skillIssueCount.length;
     message.channel.send(`**${message.member.displayName}** has said skill issue ${counter.SkillIssue[id]} time(s)!`);
-    fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), UpdateJSON);
-}
-
-function UpdateJSON(error) {
-    if (error) return console.error(error);
+    fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), err => console.error(err));
 }

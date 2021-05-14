@@ -3,7 +3,7 @@ const fs = require('fs');
 
 let commands = {};
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
     commands[command.name] = command;
@@ -15,13 +15,10 @@ module.exports = function(message) {
     const command = args.shift().toLowerCase();
 
     if (!commands[command]) return;
-    try 
-    {
+    try {
         commands[command].execute(message, args);
-    } 
-    catch(error) 
-    {
+    } catch(error) {
         console.error(error);
         message.reply('An error occured while trying to execute the command.');
     }
-}
+};

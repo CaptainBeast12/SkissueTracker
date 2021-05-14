@@ -1,5 +1,6 @@
 const fs = require('fs');
 const counter = require('../counter.json');
+const writeCallback = err => console.error(err);
 
 function IsAddedToCounter(id) {
     for (const key in counter.SkillIssue) {
@@ -15,10 +16,6 @@ async function GetUserFromMention(guild, mention) {
 
     const user = await guild.members.fetch(id[1]);
     if (user) return user;
-}
-
-function UpdateJSON(error) {
-    if (error) return console.error(error);
 }
 
 module.exports = {
@@ -52,7 +49,7 @@ module.exports = {
                 }
                 
                 counter.SkillIssue[user.id] = 0;
-                fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), UpdateJSON);
+                fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), writeCallback);
                 message.channel.send(`Successfully added **${user.displayName}** to the tracker!`);
                 break;
             case 'remove':
@@ -62,7 +59,7 @@ module.exports = {
                 }
                 
                 delete counter.SkillIssue[user.id];
-                fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), UpdateJSON);
+                fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), writeCallback);
                 message.channel.send(`Successfully removed **${user.displayName}** from the tracker!`);
                 break;
             case 'update':
@@ -78,7 +75,7 @@ module.exports = {
 
                 args[2] = Math.floor(args[2]);
                 counter.SkillIssue[user.id] = args[2];
-                fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), UpdateJSON);
+                fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), writeCallback);
                 message.channel.send(`Successfully updated **${user.displayName}'s** value to ${args[2]}!`);
                 break;
             default:
