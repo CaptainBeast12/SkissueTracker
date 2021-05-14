@@ -26,7 +26,7 @@ function SkillIssue(message) {
     }
 
     if (!foundId) return;
-    const skillIssueCount = message.content.toLowerCase().match(/skill issue/g);
+    const skillIssueCount = message.content.match(/skill issue/gi);
     if (!skillIssueCount) return;
 
     counter.SkillIssue[id] += skillIssueCount.length;
