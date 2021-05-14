@@ -5,7 +5,7 @@ const CommandHandler = require('./commandHandler');
 const fs = require('fs');
 const client = new Discord.Client();
 
-let counter = require('./counter');
+const counter = require('./counter');
 
 client.login(process.env.BOT_TOKEN);
 client.on('ready', () => {
@@ -26,9 +26,10 @@ function SkillIssue(message) {
     }
 
     if (!foundId) return;
-    if (!message.content.toLowerCase().includes('skill issue')) return;
-    
-    counter.SkillIssue[id]++;
+    const skillIssueCount = message.content.toLowerCase().match(/skill issue/g);
+    if (!skillIssueCount) return;
+
+    counter.SkillIssue[id] += skillIssueCount.length;
     message.channel.send(`**${message.member.displayName}** has said skill issue ${counter.SkillIssue[id]} time(s)!`);
     fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), UpdateJSON);
 }
