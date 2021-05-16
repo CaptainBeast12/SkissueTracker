@@ -1,6 +1,6 @@
 const fs = require('fs');
 const counter = require('../counter.json');
-const writeCallback = err => console.error(err);
+const writeCallback = err => err ? console.error(err) : null;
 
 function IsAddedToCounter(id) {
     for (const key in counter.SkillIssue) {

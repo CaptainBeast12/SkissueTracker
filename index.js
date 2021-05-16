@@ -30,5 +30,5 @@ function SkillIssue(message) {
 
     counter.SkillIssue[id] += skillIssueCount.length;
     message.channel.send(`**${message.member.displayName}** has said skill issue ${counter.SkillIssue[id]} time(s)!`);
-    fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), err => console.error(err));
+    fs.writeFile('./counter.json', JSON.stringify(counter, null, 2), err => err ? console.error(err) : null);
 }
